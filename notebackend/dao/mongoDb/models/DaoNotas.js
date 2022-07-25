@@ -35,6 +35,28 @@ module.exports = class DaoNotas extends DaoObject {
         return { numeroFilas };
     }
 
+    async getAllPaged({idUser, page=1, pageLimit=20}) {
+        const notes = await this.find(
+          {idUser: this.objectId(idUser)},
+          null,
+          null,
+          null,
+          null,
+          true
+        );
+        const totalDocs = await notes.count();
+        notes.skip(pageLimit * ( page - 1 ))
+        notes.limit(pageLimit);
+        const notesDocs = await notes.toArray();
+        return {
+          total: totalDocs,
+          page,
+          pageLimit,
+          totalPages: Math.ceil(totalDocs/pageLimit),
+          notes: notesDocs
+        }
+      }
+
     async getNotesByUser({ codigo }) {
         const query = { idUser: codigo };
         console.log({query});
@@ -43,7 +65,7 @@ module.exports = class DaoNotas extends DaoObject {
             sort:[["title", 1]]
           };
         const docsCursor = this.find(query, options);
-        //const filas = await docsCursor.toArray()
+       // const filas = await docsCursor.toArray()
         return docsCursor;
     }
 

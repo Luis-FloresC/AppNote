@@ -26,7 +26,7 @@ const validPassword = (password) => {
     }
 }
 
-const isEquals = (value,compare) => {
+const isEquals = (value, compare) => {
     if (value === compare) {
         return true;
     }
@@ -35,5 +35,9 @@ const isEquals = (value,compare) => {
     }
 }
 
+const mergeToArray = (element, index, array) => {
+    console.log("a[" + index + "] = " + element);
+}
 
-module.exports = {validId,isEmpty,validPassword,isEquals};
+
+module.exports = { validId, isEmpty, validPassword, isEquals,mergeToArray };

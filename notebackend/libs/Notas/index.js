@@ -31,7 +31,7 @@ module.exports = class Notas {
       }
     );
     return {
-        id: result.lastID,title, description, keyword, idUser 
+        id: result.lastID,title, description, keyword, idUser ,"mensaje": "Nota guardada"
     };
   };
 
@@ -52,8 +52,13 @@ module.exports = class Notas {
     return {
       id: codigo,
       title, description, keyword, idUser,
-      modified: result.changes
+      modified: result.changes,
+      "mensaje": "Nota actualizada"
     }
+  }
+
+  async getPagedNotes(idUser, page=1, limit=20) {
+    return this.NotasDao.getAllPaged({idUser, page, pageLimit:limit});
   }
 
   async deleteNote({ codigo }) {
@@ -61,7 +66,8 @@ module.exports = class Notas {
     const result = await this.NotasDao.deleteOne({ codigo });
     return {
       ...noteToDelete,
-      deleted: result.changes
+      deleted: result.changes,
+      "mensaje": "Nota eliminada"
     };
   }
 
