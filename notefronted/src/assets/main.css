@@ -1867,3 +1867,19 @@ select {
     opacity: 1;
   }
 }
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+@tailwind typography;
+@tailwind forms;
+@tailwind line-clamp;
+@tailwind aspect-ratio;
+@media (min-width: 768px) {
+
+  .md\:line-clamp-none {
+    -webkit-line-clamp: unset;
+  }
+}
