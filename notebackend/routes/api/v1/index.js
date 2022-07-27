@@ -19,6 +19,6 @@ router.get('/', function (req, res, next) {
 
 
 router.use('/notes',authorizer,jwtAuthorizer, NotesRoutes);
-router.use('/auth', authorizer,SeguridadRoutes);
+router.use('/auth',authorizer,SeguridadRoutes);
 
 module.exports = router;

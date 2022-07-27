@@ -1,7 +1,6 @@
 const authorizer = (req, res, next)=>{
     const clientApiKey = req.headers.apikey || '';
     const appApiKey = (process.env.APP_API_KEY).split('|');
-    console.log(clientApiKey);
     if (appApiKey.includes(clientApiKey)) {
       return next();
     }

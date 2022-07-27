@@ -5,7 +5,7 @@ const axiosPrivate = axios.create();
 
 axiosPublic.defaults.baseURL = process.env.REACT_APP_API_HOST
 axiosPrivate.defaults.baseURL = process.env.REACT_APP_API_HOST
-
+console.log(process.env.REACT_APP_API_HOST);
 axiosPublic.defaults.headers.common['apikey'] = process.env.REACT_APP_API_TOKEN;
 axiosPrivate.defaults.headers.common['apikey'] = process.env.REACT_APP_API_TOKEN;
 

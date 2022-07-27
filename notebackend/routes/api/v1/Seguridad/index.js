@@ -15,7 +15,7 @@ const {jwtSign} = require('../../../../libs/Seguridad');
 router.post('/login', async (req, res)=>{
   try {
     const {email, password} = req.body;
-   
+    console.log({email,password});
     const userData = await user.getUsuarioByEmail({email});
     if(! user.comparePasswords(password, userData.password) ) {
       console.error('seguridad de inicio de sesión: ', {error:`Credenciales para usuario ${userData._id} ${userData.email} incorrectas.`});
