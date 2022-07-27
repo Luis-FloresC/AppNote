@@ -3,7 +3,19 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var cors = require('cors');
 
+const corsWhiteList = (process.env.CORSLIST || '').split('|');
+const corsOptions = {
+  origin: (origin, next)=>{
+    console.log('CORS origin:', origin);
+    if (corsWhiteList.includes(origin || "")) {
+      next(null, true);
+    } else {
+      next(new Error('Not Allowed by Cors Policy'));
+    }
+  }
+}
 var apiRouter = require('./routes/api');
 
 var app = express();
