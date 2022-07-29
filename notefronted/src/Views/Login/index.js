@@ -24,13 +24,17 @@ const Login = () => {
   const onSignInClick = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    Navigator('/signin');
+    Navigator('/signIn');
   }
   const onLoginClick = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    await submitLogin(dispatch, formValues.email, formValues.password);
-    
+    try {
+      await submitLogin(dispatch, formValues.email, formValues.password);
+      Navigator('/home')
+    } catch (ex) {
+      console.log(ex);
+    }
   }
   return (
     <LoginUx

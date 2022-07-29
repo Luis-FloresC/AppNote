@@ -15,9 +15,15 @@ const {jwtSign} = require('../../../../libs/Seguridad');
 router.post('/login', async (req, res)=>{
   try {
     const {email, password} = req.body;
-    console.log({email,password});
+    //console.log({email,password});
     const userData = await user.getUsuarioByEmail({email});
-    if(! user.comparePasswords(password, userData.password) ) {
+    
+    if(!userData) {
+      console.error('seguridad de inicio de sesión: ', {error:`Credenciales no Válidas`});
+      return res.status(403).json({ "error": "Credenciales no Válidas" });
+    }
+
+    if(!user.comparePasswords(password, userData.password) ) {
       console.error('seguridad de inicio de sesión: ', {error:`Credenciales para usuario ${userData._id} ${userData.email} incorrectas.`});
       return res.status(403).json({ "error": "Credenciales no Válidas" });
     }
@@ -30,7 +36,7 @@ router.post('/login', async (req, res)=>{
     };
     const {password: passwordDb, created, updated, ...jwtUser} = userData;
     const jwtToken = await jwtSign({jwtUser, generated: new Date().getTime()});
-   // console.log(dataUsuario);
+   console.log(dataUsuario);
     return res.status(200).json({token: jwtToken,usuario: dataUsuario});
   } catch (ex) {
     console.error('seguridad de inicio de sesión:', {ex});

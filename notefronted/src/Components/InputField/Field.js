@@ -1,4 +1,4 @@
-import './Field.css';
+//import './Field.css';
 const Field = ({
   name = "",
   labelText = "",
@@ -8,10 +8,12 @@ const Field = ({
   ...rest
 }) => {
   return (
-    <fieldset className="input">
-      <label htmlFor={name}>{labelText}</label>
-      <input type={type} name={name} id={name} value={value} onChange={onChange} {...rest} />
-    </fieldset>
+    <div className="form-control">
+      <label className="label">
+        <span className="label-text">{labelText}</span>
+      </label>
+      <input type={type} id={name} name={name} value={value} onChange={onChange} {...rest} />
+    </div>
   );
 }
 

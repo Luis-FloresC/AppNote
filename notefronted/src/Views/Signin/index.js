@@ -22,6 +22,7 @@ const SignIn = () => {
         formValues.email,
         formValues.password
       );
+      console.log(data);
       Navigator('/login');
     } catch (ex) {
       console.log(ex);

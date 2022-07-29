@@ -1,7 +1,9 @@
 import NavBar from '../NavBar';
-import './page.css';
+import Footer from '../Footer';
+//import './page.css';
+
 const Page = ({ children, useAbsoluteCenter = false, showNavBar = true, pageTitle = "..." }) => {
-  let className = ['page'];
+  let className = ['hero','min-h-screen','bg-base-200'];
   if (useAbsoluteCenter) {
     className.push('absoluteCenter');
   }
@@ -11,12 +13,13 @@ const Page = ({ children, useAbsoluteCenter = false, showNavBar = true, pageTitl
 
   return (
     <>
+   
       {showNavBar && <NavBar title={pageTitle} />}
       <section className={className.join(' ')}>
-        <section className="content">
-          {children}
-        </section>
+        {children}
       </section>
+      {showNavBar && <Footer />}
+   
     </>
   );
 }
