@@ -19,7 +19,9 @@ const reducer = (state = defaultValue, action = { type: "NONE", payload: null })
         ...state,
         isLoading: false,
         token: payload.token,
+        user: payload.user
       }
+      console.log({payload});
       localStorage.setItem('auth', JSON.stringify(newState));
       return newState;
     case "LOGIN_FAILED":

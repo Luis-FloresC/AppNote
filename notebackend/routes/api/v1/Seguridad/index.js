@@ -37,7 +37,7 @@ router.post('/login', async (req, res)=>{
     const {password: passwordDb, created, updated, ...jwtUser} = userData;
     const jwtToken = await jwtSign({jwtUser, generated: new Date().getTime()});
    console.log(dataUsuario);
-    return res.status(200).json({token: jwtToken,usuario: dataUsuario});
+    return res.status(200).json({token: jwtToken,user: dataUsuario});
   } catch (ex) {
     console.error('seguridad de inicio de sesión:', {ex});
     return res.status(500).json({"error":"No es posible procesar la solicitud."});

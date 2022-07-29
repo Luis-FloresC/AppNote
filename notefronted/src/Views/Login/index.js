@@ -2,7 +2,7 @@ import LoginUx from "./LoginUx";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { submitLogin, cleanLoginError } from './LoginActions';
+import { submitLogin, cleanLoginError ,cerrarSesion } from './LoginActions';
 
 const Login = () => {
   const Navigator = useNavigate();
@@ -19,6 +19,7 @@ const Login = () => {
     if (error) {
       cleanLoginError(dispatch);
     }
+    cerrarSesion(dispatch);
     setFormValues(newFormValues);
   }
   const onSignInClick = async (e) => {

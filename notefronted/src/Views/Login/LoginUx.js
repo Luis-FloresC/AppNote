@@ -17,7 +17,9 @@ const LoginInUx = ({
     >
 
       <div className="hero min-h-screen bg-base-200">
+      
         <div className="hero-content flex-col lg:flex-row-reverse">
+        
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">Registrarse ahora!</h1>
             <p className="py-6">Aplicación de notas <span className="animate-spin">v1.0.0</span></p>
@@ -26,6 +28,7 @@ const LoginInUx = ({
 
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <div className="card-body">
+            {error && <ErrorField>{error}</ErrorField>}
               <form>
                 <Field
                   name="email"
@@ -53,7 +56,7 @@ const LoginInUx = ({
                 </div>
                 <div className="form-control mt-6">
                   <button onClick={onLoginClick} className="btn btn-primary">Iniciar Sesión</button>
-                  {error && <ErrorField>{error}</ErrorField>}
+                  
                 </div>
               </form>
             </div>

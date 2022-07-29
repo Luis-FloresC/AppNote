@@ -6,26 +6,6 @@ import { setAuth } from '../../Services/api/axios';
 import { RadialProgress } from 'react-radial-progress-indicator';
 
 
-/*<div className="hero-overlay bg-opacity-60"></div>
-  <div className="hero-content text-center text-neutral-content">
-    <div className="max-w-md">
-      <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-      <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-      <button className="btn btn-primary">Get Started</button>
-    </div>
-  </div>
-  <RadialProgress
-              backgroundColour="#1F4B9D"
-              ringBgColour="#FBF5EB"
-              ringFgColour="#1F4B9D"
-              backgroundTransparent
-              width="20"
-              height="20"
-              text={function text(steps, proportion) { return "".concat(Math.floor(100 * proportion), "%") }}
-              steps={4}
-              step={4}
-            />
-  */
 
 const Splash = () => {
   const dispatch = useDispatch();
@@ -33,9 +13,6 @@ const Splash = () => {
   const user = useSelector(state => state.security);
   useEffect(() => {
     app_start_loading(dispatch);
-    setTimeout(() => {
-      app_loaded(dispatch);
-    }, 5000);
   }, [dispatch]);
 
   useEffect(() => {
@@ -43,11 +20,11 @@ const Splash = () => {
       setAuth(user.token);
     }
     app_loaded(dispatch);
-  }, [user,dispatch]);
+  }, [user]);
 
   return (
     <Page
-      useAbsoluteCenter={true}
+
       showNavBar={false}
     >
       <div className="hero-content w-full bg-base-100 flex-col lg:flex-row-reverse">
