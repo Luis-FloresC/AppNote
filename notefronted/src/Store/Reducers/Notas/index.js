@@ -11,7 +11,7 @@ import {
     documents: {
       total: 0,
       page: 1,
-      pageLimit: 50,
+      pageLimit: 5,
       totalPages: 0,
       notes: []
     },

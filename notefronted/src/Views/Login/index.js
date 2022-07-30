@@ -1,5 +1,5 @@
 import LoginUx from "./LoginUx";
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { submitLogin, cleanLoginError ,cerrarSesion } from './LoginActions';
@@ -10,6 +10,11 @@ const Login = () => {
   const [formValues, setFormValues] = useState({ email: '', password: '' });
   const { isLoading, error } = useSelector(state => state.security);
   
+  useEffect(() => {
+    cerrarSesion(dispatch);
+  },
+    [dispatch]);
+
   const onChangeHandler = (event) => {
     let { name, value } = event.target;
     let newFormValues = {
@@ -19,7 +24,7 @@ const Login = () => {
     if (error) {
       cleanLoginError(dispatch);
     }
-    cerrarSesion(dispatch);
+   // cerrarSesion(dispatch);
     setFormValues(newFormValues);
   }
   const onSignInClick = async (e) => {
@@ -38,6 +43,7 @@ const Login = () => {
     }
   }
   return (
+    
     <LoginUx
       passwordValue={formValues.password}
       emailValue={formValues.email}

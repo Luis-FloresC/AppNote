@@ -14,7 +14,7 @@ const ListNotes = ({ documents = [] }) => {
 
   );
 }
-const ListItem = ({ title, description, keyword, created }) => {
+const ListItem = ({ title, description, keyword, created,_id }) => {
 
   const keywords = keyword.map(
     (o) => {
@@ -37,8 +37,8 @@ const ListItem = ({ title, description, keyword, created }) => {
         <div className="px-6 pt-4 pb-2">
           {keywords}
         </div>
-        <div className="btn-group text-center ml-4 p-3">
-          <button className="btn btn-info">Editar</button>
+        <div className="btn-group navbar-end ml-20">
+          <button className="btn btn-info">Editar {_id}</button>
          
           <button className="btn btn-danger">Eliminar</button>
         </div>
