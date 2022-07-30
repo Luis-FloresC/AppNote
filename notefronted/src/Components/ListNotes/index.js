@@ -1,28 +1,36 @@
-import './List.css';
+//import './List.css';
 
 const ListNotes = ({ documents = [] }) => {
-    const listItems = documents.map((o) => {
-      return <ListItem key={o._id} {...o} />
-    })
-    return (
-      <section>
+  const listItems = documents.map((o) => {
+    return <ListItem key={o._id} {...o} />
+  })
+  return (
+    <>
+      <div className="grid h-full card bg-base-300 rounded-box place-items-center">
         {listItems}
-      </section>
-    );
-  }
-  const ListItem = ({ title,description,keyword,created }) => {
-    return (
-      <section className={['listItem', type.toLowerCase()].join(' ')}>
-        <div>
-        <span><b>{(title)}</b></span>
-          <span><b>{description}</b></span>
-         
+      </div>
+    
+    </>
+
+  );
+}
+const ListItem = ({ title, description, keyword, created }) => {
+  return (
+    <>
+    <div className="card w-full bg-primary text-primary-content">
+      <div className="card-body">
+        <h2 className="card-title">{title}!</h2>
+        <h3 className="link">{keyword.join(" ")}</h3>
+        <p>{description}</p>
+        <p>{new Date(created).toLocaleDateString()}</p>
+        <div className="card-actions justify-end">
+          <button className="btn">Editar Nota</button>
+          <button className="btn">Eliminar Nota</button>
         </div>
-        <div>
-          <span>{keyword.join(",")}</span>
-          <span>{new Date(created).toLocaleDateString()}</span>
-        </div>
-      </section>
-    )
-  }
-  export default ListNotes;
+      </div>
+    </div>
+      <div className="divider text-white"></div>
+      </>
+  )
+}
+export default ListNotes;

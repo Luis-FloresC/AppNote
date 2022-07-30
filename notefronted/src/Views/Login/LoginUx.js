@@ -12,7 +12,6 @@ const LoginInUx = ({
   return (
     <Page
       showNavBar={true}
-      useAbsoluteCenter={false}
       pageTitle="Iniciar Sesión"
     >
 

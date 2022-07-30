@@ -18,7 +18,8 @@
     transition: background-color 0.2s ease-in-out;
   }
   .paging_page.current{
-    background-color: #ccc;
+    background-color: #012CCF;
+    color: #fff;
     cursor: default;
   }
   .paging__limit {

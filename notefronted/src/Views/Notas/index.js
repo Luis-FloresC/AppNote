@@ -1,53 +1,40 @@
-import Page from "../../Components/Page";
+import NotasUx from './NotasUx';
 
-const Home = () => {
-    return (
-        <Page showNavBar={true} pageTitle="Mis Notas">
-            <div className="bg-base-200 hero-content w-full ">
-                <div className="flex flex-col w-full h-full border-opacity-60">
-                    <div className="grid h-full card bg-base-300 rounded-box place-items-center">
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+//import { useNavigate } from 'react-router-dom';
+import { getNotesDocuments } from './NotasActions';
+import ListNotes from '../../Components/ListNotes';
+import Paging from '../../Components/Paging';
 
-                        <div className="card w-full bg-primary text-primary-content">
-                            <div className="card-body">
-                                <h2 className="card-title">Card title!</h2>
-                                <p>If a dog chews shoes whose shoes does he choose?</p>
-                                <div className="card-actions justify-end">
-                                    <button className="btn">Editar Nota</button>
-                                    <button className="btn">Eliminar Nota</button>
-                                </div>
-                            </div>
-                        </div>
+const Notes = () => {
+  const dispatch = useDispatch();
+  //const navigate = useNavigate();
+  const { documents } = useSelector(state => state.notes);
+  useEffect(() => {
+    getNotesDocuments(dispatch, documents.page, documents.pageLimit);
+  },
+    []);
 
-                    </div>
-                    <div className="divider text-white"></div>
-                    <div className="grid h-full card bg-base-300 rounded-box place-items-center">
-                        <div className="card w-full bg-primary text-primary-content">
-                            <div className="card-body">
-                                <h2 className="card-title">Card title!</h2>
-                                <p className="link text-cyan-800">#Tags</p>
-                                <p>If a dog chews shoes whose shoes does he choose?</p>
-                                <div className="card-actions justify-end">
-                                    <button className="btn">Editar Nota</button>
-                                    <button className="btn">Eliminar Nota</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="divider text-white"></div>
-                    <div className="grid h-full  mb-10 place-items-center">
-                        <div className="btn-group">
-                            <button className="btn">1</button>
-                            <button className="btn btn-active">2</button>
-                            <button className="btn">3</button>
-                            <button className="btn">4</button>
-                        </div>
-                    </div>
-                </div>
+  const Pager = () => {
+    if (documents.totalPages > 1) {
+      return (<Paging currentPage={documents.page}
+        totalPages={documents.totalPages}
+        pageLimit={documents.pageLimit}
+        onPageChange={(page) => getNotesDocuments(dispatch, page, documents.pageLimit)}
+        onLimitChange={(e) => getNotesDocuments(dispatch, documents.page, e.target.value)}>
+      </Paging>
+      )
+    }
+    return null;
+  }
+  return (
+    <NotasUx  >
+  <Pager/>
+      <ListNotes documents={documents.notes}></ListNotes>
+      <Pager/>
+    </NotasUx>
+  )
+}
 
-
-            </div>
-        </Page>
-    );
-};
-
-export default Home;
+export default Notes;
