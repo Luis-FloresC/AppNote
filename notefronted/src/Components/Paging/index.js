@@ -44,10 +44,12 @@ const Paging = ({ currentPage, totalPages, pageLimit, onPageChange = () => { }, 
     <div className="paging">
       <div className="paging__limit">
         <span>Limit:</span>
-        <select value={pageLimit} onChange={onLimitChange}>
+        <select class="select select-primary w-full max-w-xs" value={pageLimit} onChange={onLimitChange}>
           <option value="5">5</option>
           <option value="10">10</option>
+          <option value="10">15</option>
           <option value="20">20</option>
+          <option value="10">25</option>
           <option value="50">50</option>
         </select>
       </div>

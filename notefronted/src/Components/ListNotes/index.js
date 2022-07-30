@@ -9,28 +9,42 @@ const ListNotes = ({ documents = [] }) => {
       <div className="grid h-full card bg-base-300 rounded-box place-items-center">
         {listItems}
       </div>
-    
+
     </>
 
   );
 }
 const ListItem = ({ title, description, keyword, created }) => {
+
+  const keywords = keyword.map(
+    (o) => {
+      return (
+        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{o}</span>
+      )
+    }
+  );
   return (
     <>
-    <div className="card w-full bg-primary text-primary-content">
-      <div className="card-body">
-        <h2 className="card-title">{title}!</h2>
-        <h3 className="link">{keyword.join(" ")}</h3>
-        <p>{description}</p>
-        <p>{new Date(created).toLocaleDateString()}</p>
-        <div className="card-actions justify-end">
-          <button className="btn">Editar Nota</button>
-          <button className="btn">Eliminar Nota</button>
+      <div className="rounded overflow-hidden shadow-lg bg-primary-focus w-full">
+
+        <div className="px-6 py-4">
+          <div className="font-bold text-xl mb-2">{title}</div>
+          <div className="text-sm text-left">{new Date(created).toLocaleDateString()}</div>
+          <p className="text-white text-base">
+            {description}
+          </p>
+        </div>
+        <div className="px-6 pt-4 pb-2">
+          {keywords}
+        </div>
+        <div className="btn-group text-center ml-4 p-3">
+          <button className="btn btn-info">Editar</button>
+         
+          <button className="btn btn-danger">Eliminar</button>
         </div>
       </div>
-    </div>
       <div className="divider text-white"></div>
-      </>
+    </>
   )
 }
 export default ListNotes;

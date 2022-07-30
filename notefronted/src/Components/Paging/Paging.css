@@ -31,7 +31,7 @@
     cursor: default;
   }
   .paging_page:hover{
-    background-color: #ccc;
+    background-color: #366FCF;
   }
   .paging_page.sep:hover{
     background-color: transparent;
