@@ -16,6 +16,17 @@ const NavBar = ({ title }) => {
     }
   }
 
+  const onNewNoteClick = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      Navigator('/add');
+    } catch (ex) {
+      console.log("error click",ex);
+
+    }
+  }
+
   const { user } = useSelector(state => state.security);
   return (
     <div className="navbar bg-base-100">
@@ -28,7 +39,7 @@ const NavBar = ({ title }) => {
           {user && (
             <>
               <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                <li><button>Mis Notas</button></li>
+                <li><button onClick={onNewNoteClick}>Nueva Nota</button></li>
                 <li><button>Acerca de</button></li>
                 <li><button onClick={onCerrarSesionClick}>Cerrar Sesión</button></li>
               </ul>

@@ -3,6 +3,7 @@ import Login from './Views/Login';
 import SignIn from './Views/Signin';
 import Home from './Views/Notas';
 import PrivateRoute from './Components/PrivateRoute';
+import NotesForm from "./Views/NotesForm";
 const Routes = () => {
   return (
     <Router>
@@ -11,6 +12,7 @@ const Routes = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/signIn' element={<SignIn />} />
         <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
+        <Route path="/add" element={<PrivateRoute><NotesForm /></PrivateRoute>} />
       </Switch>
     </Router>
   );
