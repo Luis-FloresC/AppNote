@@ -1,4 +1,4 @@
-import loginApi from '../../Services/api/loginapi';
+import loginApi from '../../Services/api/loginApi';
 import { setAuth } from '../../Services/api/axios';
 const LOGIN_LOADING = "LOGIN_LOADING";
 const LOGIN_SUCCESS = "LOGIN_SUCCESS";

@@ -2,7 +2,7 @@ import NotesFormUx from "./NotesFormUx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-//import { postNewNote } from "./NotesActionsForm";
+import { addNote } from "../Notas/NotasActions";
 import { getNotesDocuments } from "../Notas/NotasActions";
 
 const NotasForm =()=>{
@@ -36,8 +36,8 @@ const NotasForm =()=>{
       const onSubmitClick = async (e) => {
         e.preventDefault();
         e.stopPropagation();
-        //const ok = await postNewCashFlow(dispatch, { ...formData, type: type.toUpperCase() });
-        const ok = false;
+        const ok = await addNote(dispatch, { ...formData });
+       // const ok = false;
         if (ok) {
           getNotesDocuments(dispatch, page, pageLimit);
           navigate("/home");

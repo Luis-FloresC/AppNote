@@ -1,7 +1,7 @@
 import SignInUx from "./SignInUx";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import getSignIn from "../../Services/api/signinapi";
+import getSignIn from "../../Services/api/signInApi";
 
 const SignIn = () => {
   const Navigator = useNavigate();

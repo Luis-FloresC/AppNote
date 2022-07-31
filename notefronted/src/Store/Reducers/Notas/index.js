@@ -4,7 +4,9 @@ import {
     NOTES_FAILED,
     NOTES_CLEAR_ERROR,
     NOTES_PAGE_CHANGE,
-    NOTES_LIMIT_CHANGE
+    NOTES_LIMIT_CHANGE,
+    NOTE_ADD_SUCCESS,
+    NOTE_ADD_FAILED
   } from "../../../Views/Notas/NotasActions";
   
   const defaultValue = {
@@ -21,6 +23,7 @@ import {
       startDate: new Date() - 10,
       endDate: new Date()
     },
+
   }
   
   const reducer = (state = defaultValue, action = { type: 'NONE', payload: null }) => {
@@ -66,6 +69,14 @@ import {
             pageLimit: payload,
           }
         }
+        case NOTE_ADD_SUCCESS:
+          return {
+            ...state,
+            documentsIsLoading: false,
+            documents: {
+              ...payload,
+            }
+          }
       default:
         return state;
     }

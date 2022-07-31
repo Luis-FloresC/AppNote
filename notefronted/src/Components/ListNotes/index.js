@@ -19,7 +19,7 @@ const ListItem = ({ title, description, keyword, created,_id }) => {
   const keywords = keyword.map(
     (o) => {
       return (
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{o}</span>
+        <span key={o} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{o}</span>
       )
     }
   );
@@ -37,9 +37,9 @@ const ListItem = ({ title, description, keyword, created,_id }) => {
         <div className="px-6 pt-4 pb-2">
           {keywords}
         </div>
-        <div className="btn-group navbar-end ml-20">
+        <div className="btn-group justify-end">
           <button className="btn btn-info">Editar {_id}</button>
-         
+          <div class="divider divider-horizontal"></div>
           <button className="btn btn-danger">Eliminar</button>
         </div>
       </div>

@@ -17,7 +17,8 @@ const Notes = () => {
     []);
 
   const Pager = () => {
-    if (documents.totalPages > 1) {
+    console.log(documents.totalPages);
+    if (documents.totalPages >= 1) {
       return (<Paging currentPage={documents.page}
         totalPages={documents.totalPages}
         pageLimit={documents.pageLimit}

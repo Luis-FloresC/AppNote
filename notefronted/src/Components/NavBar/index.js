@@ -1,9 +1,20 @@
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { useEffect,useState } from 'react';
 const NavBar = ({ title }) => {
   const Navigator = useNavigate();
-
+  const [linkHome,setLinkHome] = useState(false);
+  const actualUrl = window.location.href;
+  useEffect(() => {
+    if(!actualUrl.includes("home"))
+    {
+      setLinkHome(true);
+    }
+    else
+    {
+      setLinkHome(false);
+    }
+  }, [actualUrl,linkHome])
 
   const onCerrarSesionClick = async (e) => {
     e.preventDefault();
@@ -11,7 +22,18 @@ const NavBar = ({ title }) => {
     try {
       Navigator('/login');
     } catch (ex) {
-      console.log("error click",ex);
+      console.log("error click", ex);
+
+    }
+  }
+
+  const onHomeClick = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      Navigator('/home');
+    } catch (ex) {
+      console.log("error click", ex);
 
     }
   }
@@ -22,7 +44,7 @@ const NavBar = ({ title }) => {
     try {
       Navigator('/add');
     } catch (ex) {
-      console.log("error click",ex);
+      console.log("error click", ex);
 
     }
   }
@@ -39,6 +61,7 @@ const NavBar = ({ title }) => {
           {user && (
             <>
               <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+              {linkHome && <li><button onClick={onHomeClick}>Menú Principal</button></li>}
                 <li><button onClick={onNewNoteClick}>Nueva Nota</button></li>
                 <li><button>Acerca de</button></li>
                 <li><button onClick={onCerrarSesionClick}>Cerrar Sesión</button></li>
@@ -52,15 +75,15 @@ const NavBar = ({ title }) => {
       <div className="navbar-center">
         <button className="btn btn-ghost normal-case text-xl text-center">{title}</button>
       </div>
-      {user && 
-      (
-        <>
+      {user &&
+        (
+          <>
             <div className="navbar-end">
               <button className="btn btn-ghost normal-case text-xl">{user.nombre}</button>
             </div>
-        </>
-      )
-    
+          </>
+        )
+
       }
       {!user && <span className="navbar-end"></span>}
     </div>

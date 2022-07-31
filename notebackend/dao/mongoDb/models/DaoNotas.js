@@ -44,10 +44,13 @@ module.exports = class DaoNotas extends DaoObject {
           null,
           true
         );
+        
         const totalDocs = await notes.count();
         notes.skip(pageLimit * ( page - 1 ))
         notes.limit(pageLimit);
         const notesDocs = await notes.toArray();
+        console.log(Math.ceil(totalDocs/pageLimit))
+        console.log({totalDocs});
         return {
           total: totalDocs,
           page,
@@ -74,7 +77,8 @@ module.exports = class DaoNotas extends DaoObject {
     }
 
     insertOne({ title, description, keyword, idUser }) {
-        return super.insertOne({ title, description, keyword, idUser, created: new Date().toISOString() });
+        const id = this.objectId(idUser);
+        return super.insertOne({ title, description, keyword, idUser: id, created: new Date().toISOString() });
     }
 
     updateKeyWord({ keyword, codigo }) {
