@@ -29,10 +29,12 @@ const Notes = () => {
     }
     return null;
   }
+
+
   return (
     <NotasUx  >
       <Pager />
-      <ListNotes documents={documents.notes}></ListNotes>
+      <ListNotes  documents={documents.notes}></ListNotes>
       <Pager />
     </NotasUx>
   )

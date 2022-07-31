@@ -10,6 +10,7 @@ export const NOTES_PAGE_CHANGE = "NOTES_PAGE_CHANGE";
 export const NOTES_LIMIT_CHANGE = "NOTES_LIMIT_CHANGE";
 export const NOTE_ADD_SUCCESS = "NOTE_ADD_SUCCESS";
 export const NOTE_ADD_FAILED = "NOTE_ADD_FAILED";
+export const NOTE_POR_ID_SUCCESS = "NOTE_POR_ID_SUCCESS";
 
 
 
@@ -37,6 +38,18 @@ export const addNote = async (dispatch,{description,title,keyword} ) => {
   }
 }
 
+export const getNote = async (dispatch,{idNota})=>{
+  try {
+    
+    dispatch({ type: NOTES_LOAD, payload: null });
+    const { data } = await axiosPrivate.get(`/notes/porId/${idNota}`);
+    console.log("Hola",data);
+    dispatch({ type: NOTE_POR_ID_SUCCESS, payload: data });
+  } catch (ex) {
+    console.log("notesActions", ex);
+    dispatch({ type: NOTES_FAILED, payload: "Error al buscar nota" });
+  }
+}
 
 export const setNotesPage = (dispatch, page) => {
   dispatch({ type: NOTES_PAGE_CHANGE, payload: page });

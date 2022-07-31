@@ -6,7 +6,8 @@ import {
     NOTES_PAGE_CHANGE,
     NOTES_LIMIT_CHANGE,
     NOTE_ADD_SUCCESS,
-    NOTE_ADD_FAILED
+    NOTE_ADD_FAILED,
+    NOTE_POR_ID_SUCCESS
   } from "../../../Views/Notas/NotasActions";
   
   const defaultValue = {
@@ -23,7 +24,7 @@ import {
       startDate: new Date() - 10,
       endDate: new Date()
     },
-
+    Notes:[]
   }
   
   const reducer = (state = defaultValue, action = { type: 'NONE', payload: null }) => {
@@ -42,6 +43,14 @@ import {
             ...payload,
           }
         }
+        case NOTE_POR_ID_SUCCESS:
+          return {
+            ...state,
+            documentsIsLoading: false,
+            Notes:{
+              ...payload
+            }
+          }
       case NOTES_FAILED:
         return {
           ...state,
