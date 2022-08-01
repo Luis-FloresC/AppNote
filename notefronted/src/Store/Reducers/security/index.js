@@ -31,6 +31,14 @@ const reducer = (state = defaultValue, action = { type: "NONE", payload: null })
         token: null,
         error: payload
       }
+      case "SIGNIN_FAILED":
+        console.log({payload});
+        return {
+          ...state,
+          isLoading: false,
+          token: null,
+          error: payload
+        }
     case "LOGIN_CLEAN_ERROR":
       return {
         ...state,

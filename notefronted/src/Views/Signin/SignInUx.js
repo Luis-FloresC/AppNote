@@ -1,12 +1,14 @@
 import Page from "../../Components/Page";
 import { Field } from '../../Components/InputField';
+import ErrorField from "../../Components/ErrorField";
 
 const SignInUx = ({
   emailValue = "",
   passwordValue = "",
   onChangeHandler = () => { },
   onSignInClick = () => { },
-  onLoginClick = () => { }
+  onLoginClick = () => { },
+  error=""
 }) => {
   return (
     <Page
@@ -24,6 +26,7 @@ const SignInUx = ({
 
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <div className="card-body">
+            {error && <ErrorField>{error}</ErrorField>}
               <form>
                 <Field
                   name="email"

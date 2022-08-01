@@ -1,9 +1,12 @@
 import SignInUx from "./SignInUx";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import getSignIn from "../../Services/api/signInApi";
+import { useSelector, useDispatch } from 'react-redux';
+import { submitSignIn, cleanSignInError  } from './SignInActions';
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+  const {  error } = useSelector(state => state.security);
   const Navigator = useNavigate();
   const [formValues, setFormValues] = useState({ email: '', password: '' });
   const onChangeHandler = (event) => {
@@ -13,16 +16,13 @@ const SignIn = () => {
       [name]: value
     }
     setFormValues(newFormValues);
+    cleanSignInError(dispatch);
   }
   const onSignInClick = async (e) => {
     e.preventDefault();
     e.stopPropagation();
     try {
-      const data = await getSignIn(
-        formValues.email,
-        formValues.password
-      );
-      console.log(data);
+      await submitSignIn(dispatch,formValues.email,formValues.password);
       Navigator('/login');
     } catch (ex) {
       console.log(ex);
@@ -40,6 +40,7 @@ const SignIn = () => {
       onSignInClick={onSignInClick}
       onLoginClick={onLoginClick}
       onChangeHandler={onChangeHandler}
+      error={error}
     />
   );
 }

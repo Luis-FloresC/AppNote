@@ -70,7 +70,6 @@ export const getNote = async (dispatch,{idNota})=>{
     
     dispatch({ type: NOTES_LOAD, payload: null });
     const { data } = await axiosPrivate.get(`/notes/porId/${idNota}`);
-    console.log("Hola",data);
     dispatch({ type: NOTE_POR_ID_SUCCESS, payload: data });
   } catch (ex) {
     console.log("notesActions", ex);
