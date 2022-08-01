@@ -18,7 +18,7 @@ const ListNotes = ({ documents = [] }) => {
 
   );
 }
-const ListItem = ({ title, description, keyword, created,_id }) => {
+const ListItem = ({ title, description, keyword, created,_id,updated }) => {
   const Navigator = useNavigate();
   const keywords = keyword.map(
     (o) => {
@@ -51,18 +51,18 @@ const ListItem = ({ title, description, keyword, created,_id }) => {
 
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">{title}</div>
-          <div className="text-sm text-left">{new Date(created).toLocaleDateString()}</div>
+          <div className="text-sm text-left">Fecha de Creación: {new Date(created).toLocaleDateString()} {updated && "/ Fecha de Actualización: " + new Date(updated).toLocaleDateString()} </div>
           <p className="text-white text-base">
-            {description}
+           Descripción: {description}
           </p>
         </div>
         <div className="px-6 pt-4 pb-2">
           {keywords}
         </div>
-        <div className="btn-group justify-end">
-          <button className="btn btn-info" onClick={onEditarClick} value={_id}>Editar Nota</button>
-          <div class="divider divider-horizontal"></div>
-          <button className="btn btn-danger" onClick={onEliminarClick} value={_id}>Eliminar</button>
+        <div className="btn-group justify-end mb-4 mr-4">
+          <button className="btn bg-warning  text-black hover:text-white" onClick={onEditarClick} value={_id}>Editar Nota</button>
+          <div class="divider divider-horizontal text-black bg-black w-1"></div>
+          <button className="btn bg-red-600 text-black hover:text-white" onClick={onEliminarClick} value={_id}>Eliminar</button>
         </div>
       </div>
       <div className="divider text-white"></div>
