@@ -1,7 +1,7 @@
 //import './List.css';
-import { axiosPrivate } from "../../Services/api/axios";
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 
 const ListNotes = ({ documents = [] }) => {
 
@@ -19,7 +19,7 @@ const ListNotes = ({ documents = [] }) => {
   );
 }
 const ListItem = ({ title, description, keyword, created,_id }) => {
-
+  const Navigator = useNavigate();
   const keywords = keyword.map(
     (o) => {
       return (
@@ -28,23 +28,13 @@ const ListItem = ({ title, description, keyword, created,_id }) => {
     }
   );
 
-  const Buscar = async(id) =>{
-    try{
-      alert("Hola");
-      const { data } = await axiosPrivate.get(`/notes/porId/${id}`);
-      alert(data.title);
-      //dispatch({ type: "NOTE_POR_ID_SUCCESS", payload: data });
-       
-    }catch(ex){
-      console.log("Error");
-    }
  
-  }
   const onEditarClick = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    
-   Buscar(e.target.value);
+    const id = e.target.value;
+    Navigator(`/note/${id}`);
+  
   }
 
   return (

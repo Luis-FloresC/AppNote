@@ -8,6 +8,15 @@ const postNew = (title,description,keyword) => {
   )
 };
 
+const putNote = (title,description,keyword,id) => {
+  return axiosPrivate.put(
+    `notes/modificarNota/${id}`,
+    {
+        title,description,keyword
+    }
+  )
+};
+
 export  {
-    postNew
+    postNew,putNote
 };

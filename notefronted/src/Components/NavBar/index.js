@@ -48,7 +48,7 @@ const NavBar = ({ title }) => {
     e.preventDefault();
     e.stopPropagation();
     try {
-      Navigator('/add');
+      Navigator('/note/0');
     } catch (ex) {
       console.log("error click", ex);
 

@@ -1,5 +1,5 @@
 import { axiosPrivate } from "../../Services/api/axios";
-import { postNew }  from "../../Services/api/notesApi";
+import { postNew, putNote }  from "../../Services/api/notesApi";
 
 
 export const NOTES_LOAD = "NOTES_LOAD";
@@ -11,8 +11,8 @@ export const NOTES_LIMIT_CHANGE = "NOTES_LIMIT_CHANGE";
 export const NOTE_ADD_SUCCESS = "NOTE_ADD_SUCCESS";
 export const NOTE_ADD_FAILED = "NOTE_ADD_FAILED";
 export const NOTE_POR_ID_SUCCESS = "NOTE_POR_ID_SUCCESS";
-
-
+export const NOTE_UPDATE_SUCCESS = "NOTE_UPDATE_SUCCESS";
+export const NOTE_UPDATE_FAILED = "NOTE_UPDATE_FAILED";
 
 export const getNotesDocuments = async (dispatch, page, limit) => {
   try {
@@ -34,6 +34,19 @@ export const addNote = async (dispatch,{description,title,keyword} ) => {
   } catch (ex) {
     console.log("notesActions", ex);
     dispatch({ type: NOTE_ADD_FAILED, payload: "Error al guardar la nota" });
+    return false;
+  }
+}
+
+export const updateNote = async (dispatch,{description,title,keyword,id} ) => {
+  try {
+    dispatch({ type: NOTES_LOAD, payload: null });
+    const {data} = await putNote(title,description,keyword,id);
+    dispatch({ type: NOTE_ADD_SUCCESS, payload: data });
+    return true;
+  } catch (ex) {
+    console.log("notesActions", ex);
+    dispatch({ type: NOTE_UPDATE_FAILED, payload: "Error al Editar la nota" });
     return false;
   }
 }

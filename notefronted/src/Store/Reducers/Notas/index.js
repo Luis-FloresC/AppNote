@@ -7,7 +7,9 @@ import {
     NOTES_LIMIT_CHANGE,
     NOTE_ADD_SUCCESS,
     NOTE_ADD_FAILED,
-    NOTE_POR_ID_SUCCESS
+    NOTE_POR_ID_SUCCESS,
+    NOTE_UPDATE_SUCCESS,
+    NOTE_UPDATE_FAILED
   } from "../../../Views/Notas/NotasActions";
   
   const defaultValue = {
@@ -24,6 +26,7 @@ import {
       startDate: new Date() - 10,
       endDate: new Date()
     },
+    isLoading: false,
     Notes:[]
   }
   
@@ -43,15 +46,39 @@ import {
             ...payload,
           }
         }
+        case NOTE_UPDATE_SUCCESS:
+          return {
+            ...state,
+            documentsIsLoading: false,
+            documents: {
+              ...payload,
+              page: 1,
+              pageLimit: 5,
+            }
+          }
+
         case NOTE_POR_ID_SUCCESS:
           return {
             ...state,
             documentsIsLoading: false,
+            isLoading: true,
             Notes:{
               ...payload
             }
           }
       case NOTES_FAILED:
+        return {
+          ...state,
+          documentsIsLoading: false,
+          documentError: payload,
+        }
+        case NOTE_UPDATE_FAILED:
+        return {
+          ...state,
+          documentsIsLoading: false,
+          documentError: payload,
+        }
+        case NOTE_ADD_FAILED:
         return {
           ...state,
           documentsIsLoading: false,
@@ -84,6 +111,8 @@ import {
             documentsIsLoading: false,
             documents: {
               ...payload,
+              page: 1,
+              pageLimit: 5,
             }
           }
       default:

@@ -12,7 +12,7 @@ const Routes = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/signIn' element={<SignIn />} />
         <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
-        <Route path="/add" element={<PrivateRoute><NotesForm /></PrivateRoute>} />
+        <Route path="/note/:id" element={<PrivateRoute><NotesForm /></PrivateRoute>} />
       </Switch>
     </Router>
   );

@@ -2,6 +2,7 @@ import Page from "../../Components/Page";
 import { Field } from "../../Components/InputField";
 import ErrorField from "../../Components/ErrorField";
 const LoginInUx = ({
+    titulo="",
     titleValue = "",
     descriptionValue = "",
     keywordValue = "",
@@ -11,7 +12,7 @@ const LoginInUx = ({
     onCancelClick = () => { },
 }) => {
     return (
-        <Page showNavBar={true} pageTitle="Nueva Nota">
+        <Page showNavBar={true} pageTitle={titulo}>
              
             <div className="hero min-h-screen bg-base-200">
          
@@ -55,7 +56,7 @@ const LoginInUx = ({
                                         onClick={onSubmitClick}
                                         className="btn btn-primary w-20"
                                     >
-                                        Guardar
+                                        Aceptar
                                     </button>
                                     <div className="divider divider-horizontal"></div>
                                     <button

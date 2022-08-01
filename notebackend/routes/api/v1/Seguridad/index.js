@@ -133,7 +133,7 @@ router.post('/recoveryPassword', async (req, res) => {
     const { password: passwordDb, created, updated, ...jwtUser } = BuscarEmail;
     const jwtToken = await jwtSignResetPassword({ jwtUser, generated: new Date().getTime() });
     //return res.status(200).json({token: jwtToken});
-    console.log(jwtToken);
+    //console.log(jwtToken);
     await servicioCorreo.sendEmail(req, res, data);
     const updateResult = await user.updatePassword({ codigo: codigo, password: pin, resetToken: jwtToken });
     console.log(updateResult);
