@@ -33,7 +33,15 @@ const ListItem = ({ title, description, keyword, created,_id }) => {
     e.preventDefault();
     e.stopPropagation();
     const id = e.target.value;
-    Navigator(`/note/${id}`);
+    Navigator(`/note/UPD/${id}`);
+  
+  }
+
+  const onEliminarClick = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = e.target.value;
+    Navigator(`/note/DEL/${id}`);
   
   }
 
@@ -54,7 +62,7 @@ const ListItem = ({ title, description, keyword, created,_id }) => {
         <div className="btn-group justify-end">
           <button className="btn btn-info" onClick={onEditarClick} value={_id}>Editar Nota</button>
           <div class="divider divider-horizontal"></div>
-          <button className="btn btn-danger">Eliminar</button>
+          <button className="btn btn-danger" onClick={onEliminarClick} value={_id}>Eliminar</button>
         </div>
       </div>
       <div className="divider text-white"></div>

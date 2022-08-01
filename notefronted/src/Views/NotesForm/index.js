@@ -3,16 +3,16 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addNote } from "../Notas/NotasActions";
-import { getNotesDocuments, getNote, updateNote,clearNotesError } from "../Notas/NotasActions";
+import { getNotesDocuments, getNote, updateNote, clearNotesError,deleteNote } from "../Notas/NotasActions";
 import { useEffect } from 'react';
 
 const NotasForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const { documents: { page, pageLimit }, documentError, Notes,isLoading } = useSelector(state => state.notes);
+  const {  action,id } = useParams();
+  const { documents: { page, pageLimit }, documentError, Notes, } = useSelector(state => state.notes);
   const [Titulo, setTitulo] = useState("Nueva Nota");
-  
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -21,22 +21,34 @@ const NotasForm = () => {
 
   useEffect(() => {
     clearNotesError(dispatch);
-    
-      if (id !== "0") {
-       
-        if (Notes.title !== formData.title) {
-          setFormData({ ...Notes });
-          setTitulo("Editar Nota");
-          getNote(dispatch, { idNota: id });
-        }
-       
-       
+    if (action === "UPD") {
+      if (Notes.title !== formData.title) {
+        setFormData({ ...Notes });
+        setTitulo("Editar Nota");
+        getNote(dispatch, { idNota: id });
       }
-      
-    
-   
+    }
+    else if (action === "DEL") {
+      if (Notes.title !== formData.title) {
+        setFormData({ ...Notes });
+        setTitulo("Eliminar Nota");
+        getNote(dispatch, { idNota: id });
+      }
+    }
+    else{
+      const Datos = {
+        title: "",
+        description: "",
+        keyword: "",
+      }
+      setTitulo("Nueva Nota");
+      setFormData(Datos);
+    }
+
+
+
   },
-    [dispatch,Notes,id]);
+    [dispatch, Notes, id,action,formData.title]);
 
 
   const onChangeHandler = (e) => {
@@ -60,9 +72,12 @@ const NotasForm = () => {
     e.preventDefault();
     e.stopPropagation();
     let ok = false;
-    if (id !== "0") {
+    if (action === "UPD") {
       ok = await updateNote(dispatch, { ...formData, id });
       alert("Nota Actualizada con éxito")
+    }else if(action === "DEL") {
+      ok = await deleteNote(dispatch, { id:id });
+      alert("Nota Eliminada con éxito");
     }
     else {
       ok = await addNote(dispatch, { ...formData });
@@ -75,7 +90,7 @@ const NotasForm = () => {
       navigate("/home");
     }
     else {
-      alert({documentError});
+      alert({ documentError });
     }
   }
 

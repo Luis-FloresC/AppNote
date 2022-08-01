@@ -13,7 +13,8 @@ export const NOTE_ADD_FAILED = "NOTE_ADD_FAILED";
 export const NOTE_POR_ID_SUCCESS = "NOTE_POR_ID_SUCCESS";
 export const NOTE_UPDATE_SUCCESS = "NOTE_UPDATE_SUCCESS";
 export const NOTE_UPDATE_FAILED = "NOTE_UPDATE_FAILED";
-
+export const NOTE_DELETE_SUCCESS = "NOTE_DELETE_SUCCESS";
+export const NOTE_DELETE_FAILED = "NOTE_DELETE_FAILED";
 export const getNotesDocuments = async (dispatch, page, limit) => {
   try {
     dispatch({ type: NOTES_LOAD, payload: null });
@@ -47,6 +48,19 @@ export const updateNote = async (dispatch,{description,title,keyword,id} ) => {
   } catch (ex) {
     console.log("notesActions", ex);
     dispatch({ type: NOTE_UPDATE_FAILED, payload: "Error al Editar la nota" });
+    return false;
+  }
+}
+
+export const deleteNote = async (dispatch,{id} ) => {
+  try {
+    dispatch({ type: NOTES_LOAD, payload: null });
+    const { data } = await axiosPrivate.delete(`/notes/eliminar/${id}`);
+    dispatch({ type: NOTE_DELETE_SUCCESS, payload: data });
+    return true;
+  } catch (ex) {
+    console.log("notesActions", ex);
+    dispatch({ type: NOTE_DELETE_FAILED, payload: "Error al Eliminar Documentos" });
     return false;
   }
 }
