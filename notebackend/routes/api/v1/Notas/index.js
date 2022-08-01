@@ -102,7 +102,7 @@ router.post('/agregarNota', async (req, res) => {
     }
 
     const keywordArray = keyword.split(",");
-    console.log({ keywordArray });
+    
     const newNote = await not.addNote({ title, description, keyword: keywordArray, idUser });
     return res.status(200).json({ resultado: newNote });
   } catch (ex) {
@@ -136,14 +136,22 @@ router.put('/agregarPalabraClave/:codigo', async (req, res) => {
       });
     }
 
-    const keywordArray = keyword.split(",");
+    let keywordArray = [];
 
-    keywordArray.forEach(function (value, key) {
-      if (!note.keyword.includes(value)) {
-        note.keyword.push(value);
-      }
+    if (typeof (keyword) === "string") {
+      keywordArray = keyword.split(",");
+    }
+    else {
+      const KText = keyword.join(",");
+      keywordArray = KText.split(",");
+    }
 
-    });
+
+    note.keyword = keywordArray;
+    note.title = title;
+    note.description = description;
+
+  
     console.log({ ...note });
 
 
